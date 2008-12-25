@@ -3,7 +3,7 @@
 
 isPalindrome num = show num == reverse (show num)
 
-getProducts start end = foldl (++) [] (map makeProducts [start..end])
+getProducts start end = concat (map makeProducts [start..end])
 	where
 	makeProducts x = map (*x) [x..end]
 
