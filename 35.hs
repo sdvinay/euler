@@ -2,8 +2,8 @@
 -- How many circular primes are there below one million
 -- make using 'ghc Primes.hs 35.hs -o 35.out'
 
-import Primes
-import System( getArgs )
+import Primes (isPrime, primes)
+import System (getArgs)
 
 rotations :: String-> [String]
 rotations str = map (\n->rotate str n) [0..(length str - 1)]

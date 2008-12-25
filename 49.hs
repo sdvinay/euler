@@ -1,12 +1,13 @@
 -- works!
 -- Find arithmetic sequences, made of prime terms, whose four digits are permutations of each other.
 
-import Data.List -- for sort, used to identify permutations
+import Data.List (sort) -- used to identify permutations
 import Primes
 
 data Sequence = Seq {lowest, step :: Integer}
 	deriving Show
 
+l :: Sequence -> Integer
 l sequence = lowest sequence
 m sequence = lowest sequence + step sequence
 h sequence = lowest sequence + 2 * step sequence
