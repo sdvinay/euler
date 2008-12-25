@@ -3,6 +3,7 @@
 
 isPalindrome num = show num == reverse (show num)
 
+getProducts :: Int -> Int -> [Int]
 getProducts start end = concat (map makeProducts [start..end])
 	where
 	makeProducts x = map (*x) [x..end]
