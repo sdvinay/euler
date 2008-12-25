@@ -5,8 +5,6 @@
 -- N odd squares, and the bottom-left are the numbers exactly halfway between them
 -- and the other two diagonals are the same as the bottom-left
 
-size=5
-
 squares size = map (\n->n*n) [1,3..size]
 averages squares = zipWith (\a b->div(a+b) 2) squares (tail squares)
 
