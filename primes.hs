@@ -1,5 +1,6 @@
 module Primes
 	( largestPrimeFactor,
+	  isPrime,
 	  primes) where
 
 largestPrimeFactor n = lpf n 2
@@ -9,5 +10,7 @@ largestPrimeFactor n = lpf n 2
       | mod n start == 0 = lpf ( div n start) start
       | otherwise = lpf n (start+1)
 
-primes = 2 : filter (\x -> (largestPrimeFactor x) == x) [3,5..]
+isPrime x = (largestPrimeFactor x) == x
+primes = 2 : filter isPrime [3,5..]
+
 
