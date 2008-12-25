@@ -1,2 +1,11 @@
+# vim swap files
 *.swp
 .*.swp
+
+# built files
+*.hi
+*.o
+*.out
+
+# vim-git's temp file
+COMMIT_EDITMSG
