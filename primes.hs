@@ -1,17 +1,13 @@
--- Generate a stream of primes
--- The first prime is 2
--- The remaining primes are not divisible by any smaller prime
+module Primes
+	( largestPrimeFactor,
+	  primes) where
 
-primes = 2 : filter isPrime [3,5..]
+largestPrimeFactor n = lpf n 2
+  where
+    lpf n start
+      | n < (start * start) = n
+      | mod n start == 0 = lpf ( div n start) start
+      | otherwise = lpf n (start+1)
 
---isPrime x = dividesNoneOf x (takeWhile (<x) primes)
-isPrime x = dividesNoneOf x [2..(x-1)]
-
-dividesNoneOf x divisors = not (dividesAnyOf x divisors)
-
-dividesAnyOf x divisors = foldr (||) False (map (\divisor -> (divides x divisor)) divisors)
-
-divides x y = mod x y == 0
-
-makedivider a = (\x -> divides x a)
+primes = 2 : filter (\x -> (largestPrimeFactor x) == x) [3,5..]
 
