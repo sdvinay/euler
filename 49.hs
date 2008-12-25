@@ -1,7 +1,7 @@
 -- works!
 -- Find arithmetic sequences, made of prime terms, whose four digits are permutations of each other.
 
-import List
+import Data.List -- for sort, used to identify permutations
 import Primes
 
 data Sequence = Seq {lowest, step :: Integer}
@@ -21,16 +21,17 @@ isPermutedSequence sequence = (isPermutation low mid) && (isPermutation low high
 	mid = lowest sequence + step sequence
 	high = lowest sequence + 2 * step sequence
 
-candidates = takeWhile(<10000) (dropWhile(<1000) primes)
-maxStep lowest = div (9999-lowest) 2
 
 getSequences lowest = filter isGood seqs
 	where 
+	maxStep lowest = div (9999-lowest) 2
 	seqs = map (\step -> Seq lowest step) [1..(maxStep lowest)]
 	isGood seq = isPermutedSequence seq && isPrimeSequence seq
 
-answer = map makenumber (concatMap getSequences candidates)
-	where makenumber sequence = low*10000*10000 + mid*10000 + high
+answer = map makenumber $ concatMap getSequences candidates
+	where 
+	candidates = takeWhile(<10000) $ dropWhile(<1000) primes
+	makenumber sequence = low*10000*10000 + mid*10000 + high
 		where 
 		low = lowest sequence
 		mid = lowest sequence + step sequence
