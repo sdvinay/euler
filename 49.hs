@@ -7,19 +7,15 @@ import Primes
 data Sequence = Seq {lowest, step :: Integer}
 	deriving Show
 
-isPrimeSequence sequence = all isPrime [low,mid,high]
-	where 
-	low = lowest sequence
-	mid = lowest sequence + step sequence
-	high = lowest sequence + 2 * step sequence
+l sequence = lowest sequence
+m sequence = lowest sequence + step sequence
+h sequence = lowest sequence + 2 * step sequence
 
-isPermutation num1 num2 = sort (show num1) == sort (show num2)
+isPrimeSequence sequence = all isPrime [l sequence,m sequence,h sequence]
 
-isPermutedSequence sequence = (isPermutation low mid) && (isPermutation low high)
-	where 
-	low = lowest sequence
-	mid = lowest sequence + step sequence
-	high = lowest sequence + 2 * step sequence
+isPermutedSequence seq = (isPermutation (l seq) (m seq)) &&
+						 (isPermutation (l seq) (h seq))
+	where isPermutation num1 num2 = sort (show num1) == sort (show num2)
 
 
 getSequences lowest = filter isPermutedSequence $ filter isPrimeSequence seqs
@@ -30,8 +26,4 @@ getSequences lowest = filter isPermutedSequence $ filter isPrimeSequence seqs
 answer = map makenumber $ concatMap getSequences candidates
 	where 
 	candidates = takeWhile(<10000) $ dropWhile(<1000) primes
-	makenumber sequence = low*10000*10000 + mid*10000 + high
-		where 
-		low = lowest sequence
-		mid = lowest sequence + step sequence
-		high = lowest sequence + 2 * step sequence
+	makenumber seq = (l seq)*10000*10000 + (m seq)*10000 + (h seq)
