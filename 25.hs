@@ -3,8 +3,5 @@
 
 import Fibs
 
-ones = 1: ones
-naturals = 1: zipWith (+) ones naturals
-
-fibPairs = zip naturals fibs
+fibPairs = zip [1..] fibs
 answer n = fst ( head (dropWhile (\fibPair -> (snd fibPair) < 10^(n-1)) fibPairs))
