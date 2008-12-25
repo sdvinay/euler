@@ -6,6 +6,7 @@
 -- and the other two diagonals are the same as the bottom-left
 
 squares size = map (\n->n*n) [1,3..size]
-averages squares = zipWith (\a b->div(a+b) 2) squares (tail squares)
+averages squares = zipWith average squares (tail squares)
+	where average a b = div(a+b) 2
 
 diagsum size = sum (squares size) + 3* sum(averages (squares size))
