@@ -22,11 +22,10 @@ isPermutedSequence sequence = (isPermutation low mid) && (isPermutation low high
 	high = lowest sequence + 2 * step sequence
 
 
-getSequences lowest = filter isGood seqs
+getSequences lowest = filter isPermutedSequence $ filter isPrimeSequence seqs
 	where 
-	maxStep lowest = div (9999-lowest) 2
 	seqs = map (\step -> Seq lowest step) [1..(maxStep lowest)]
-	isGood seq = isPermutedSequence seq && isPrimeSequence seq
+		where maxStep lowest = div (9999-lowest) 2
 
 answer = map makenumber $ concatMap getSequences candidates
 	where 
