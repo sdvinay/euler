@@ -3,4 +3,4 @@
 
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
-answer n = foldr (+) 0 (filter (\x -> mod x 2 == 0) (takeWhile (<n) fibs))
+answer n = sum (filter even (takeWhile (<n) fibs))
