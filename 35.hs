@@ -1,5 +1,6 @@
 -- works!
 -- How many circular primes are there below one million
+-- make using 'ghc Primes.hs 35.hs -o 35.out'
 
 import Primes
 import System( getArgs )
