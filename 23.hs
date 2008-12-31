@@ -17,15 +17,16 @@ abundants n = filter isAbundant [1 .. n]
 sumsOfLists xs ys = nub $ sort $ concatMap sums xs
 	where sums x = map (\y -> x + y) ys
 
-allSums lst = nub $ sort $ foldl1 union [evensTogether, oddsTogether, evensAndOdds]
-	where 
-	evens = filter even lst
-	odds = filter odd lst
-	evensTogether = sumsOfLists evens evens
-	oddsTogether  = sumsOfLists odds odds
-	evensAndOdds  = sumsOfLists odds evens
+oddAbundants  n = filter odd  (abundants n)
+evenAbundants n = filter even (abundants n)
 
 answers n = filter (not . isAbundantSum) [1..n]
-	where isAbundantSum x = elem x $ allSums $ abundants n
+
+isAbundantSum x
+  | odd  x = elem x $ sumsOfLists (oddAbundants x) ( evenAbundants x)
+  | even x = elem x $ union (sumsOfLists (oddAbundants  x) (oddAbundants x)) (sumsOfLists (evenAbundants  x) (evenAbundants x))
 
 answer = sum $ answers limit
+
+main = print answer 
+
