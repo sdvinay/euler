@@ -4,14 +4,15 @@
 import Data.List
 import Divisors
 
-limit = 28123 -- the problem tells us this is the greatest number
+limit = 28123 -- the problem tells us this is the greatest number to consider
 
 isAbundant n = (sum $ divisors n) > n
-abundants = filter isAbundant [1 .. limit]
-allSums = nub $ sort $ concatMap sums abundants
-	where sums x = map (\y -> x + y) abundants
+abundants n = filter isAbundant [1 .. n]
 
-answers = filter (not . isAbundantSum) [1..limit]
-	where isAbundantSum x = elem x allSums
+allSums lst = nub $ sort $ concatMap sums lst
+	where sums x = map (\y -> x + y) lst
 
-answer = sum answers
+answers n = filter (not . isAbundantSum) [1..n]
+	where isAbundantSum x = elem x $ allSums $ abundants n
+
+answer = sum $ answers limit
