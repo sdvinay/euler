@@ -6,12 +6,12 @@ import Data.List
 -- then find the "large divisors", which are the corresponding divisors of the smalls
 divisors :: Int -> [Int]
 divisors n = sort $ union smalls bigs
-	where
-	smalls = small_divisors n
-	bigs = large_divisors n smalls
+    where
+    smalls = small_divisors n
+    bigs = large_divisors n smalls
 
 small_divisors n = filter (divides n) $ takeWhile (\x -> x*x <= n) [1..]
-	where divides x y = (mod x y) == 0
+    where divides x y = (mod x y) == 0
 
 -- we don't want to count a number as its own divisor, so filter 1 out of the smalls
 -- before computing the large divisors
