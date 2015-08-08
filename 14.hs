@@ -1,4 +1,5 @@
--- doesn't work yet
+-- works! but without memoization, this takes minutes to run
+-- still TODO memoization
 -- Which starting number, under one million, produces the longest chain?
 -- http://projecteuler.net/index.php?section=problems&id=14
 
@@ -20,10 +21,4 @@ maxPr p1 p2 | snd(p1) < snd(p2) = p2
             | otherwise         = p1
 
 longestPath n = foldr1 (maxPr) $ makePairs 1 n
-{-
-longestPath n = maximum $ map seqlen [1..n]
-answer n = filter (\x-> seqlen x == longest) [1..n]
-	where longest = longestPath n
--}
-
 
