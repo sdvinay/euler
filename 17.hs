@@ -1,7 +1,10 @@
--- doesn't work yet
+-- works!
 -- If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used? 
+-- https://projecteuler.net/problem=17
 
-answer n = sum . map count $ map spellNumber [1..n]
+answer n = sum $ map countChars [1..n]
+
+countChars n = count $ spellNumber n
 
 count word = length . filter (/='-') $ filter(/=' ') word
 
