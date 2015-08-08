@@ -2,9 +2,10 @@
 -- Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
 import Data.List
+import System
 import Divisors
 
-limit = 28123 -- the problem tells us this is the greatest number to consider
+limit = 1000 -- the problem tells us this is the greatest number to consider
 
 isAbundant n = (sum $ divisors n) > n
 abundants n = filter isAbundant [1 .. n]
@@ -22,11 +23,15 @@ evenAbundants n = filter even (abundants n)
 
 answers n = filter (not . isAbundantSum) [1..n]
 
+-- hmm, I wonder if the (oddAbundants x), etc., is causing re-calculation, because we keep passing in
+-- different values of x.  Maybe we should make it isAbundantSum x n, and call (oddAbundants n) each
+-- time, where n is the input (and therefore the same across all invocations in an instance of the program)
 isAbundantSum x
   | odd  x = elem x $ sumsOfLists (oddAbundants x) ( evenAbundants x)
   | even x = elem x $ union (sumsOfLists (oddAbundants  x) (oddAbundants x)) (sumsOfLists (evenAbundants  x) (evenAbundants x))
 
 answer = sum $ answers limit
 
-main = print answer 
+main = do argv <- getArgs
+	print sum $ answers $ read argv!!0
 

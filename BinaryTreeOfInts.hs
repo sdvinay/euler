@@ -11,7 +11,7 @@ longestPath Empty = 0
 longestPath node = (val node) + maximum (map longestPath [left node, right node])
 
 makeTree :: [String] -> BTreeInt
-makeTree input = head $ foldr makeNodes [] input
+makeTree input = head $ foldr1 makeNodes input
 	where
 	makeLeaves       :: String -> [BTreeInt]
 	makeLeaves row = map makeLeafNode $ words row

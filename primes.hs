@@ -10,7 +10,9 @@ largestPrimeFactor n = lpf n 2
       | mod n start == 0 = lpf ( div n start) start
       | otherwise = lpf n (start+1)
 
-isPrime x = (largestPrimeFactor x) == x
+isPrime x | x > 1 =  (largestPrimeFactor x) == x
+          | otherwise = False
+
 primes = 2 : filter isPrime [3,5..]
 
 
