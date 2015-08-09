@@ -3,6 +3,11 @@ module Primes
       isPrime,
       primes) where
 
+-- current implmenentation: take 30000 primes takes ~34 sec
+-- current implmenentation: take 20000 primes takes ~20 sec
+-- current implmenentation: take 10000 primes takes 7-8 sec
+-- timings are on MacBook Air, of CPU time 
+
 primeFactors :: Integer -> [Integer]
 primeFactors n = pfs n 2
   where
