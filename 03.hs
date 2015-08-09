@@ -3,5 +3,5 @@
 import Primes
 
 input = 600851475143
-answer = largestPrimeFactor input
+answer = maximum $ primeFactors input
 
