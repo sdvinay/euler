@@ -11,8 +11,12 @@ primeFactors n = pfs n 2
       | mod n start == 0 = start:(pfs ( div n start) start)
       | otherwise = pfs n (start+1)
 
-isPrime x | x > 1 =  length (primeFactors x) == 1
-          | otherwise = False
+isPrime n = isP n 2
+  where
+    isP n start
+      | n < (start * start) = True
+      | mod n start == 0 = False
+      | otherwise = isP n (start+1)
 
 primes = 2 : filter isPrime [3,5..]
 
