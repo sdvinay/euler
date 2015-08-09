@@ -1,7 +1,7 @@
 module Primes
-	( largestPrimeFactor,
-	  isPrime,
-	  primes) where
+    ( largestPrimeFactor,
+      isPrime,
+      primes) where
 
 largestPrimeFactor n = lpf n 2
   where
