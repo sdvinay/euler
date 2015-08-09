@@ -16,3 +16,10 @@ fractions d = [(n,d)| n<-[1..d], n<d, (gcd n d) ==1]
 numFractions :: Int-> Int
 numFractions d | isPrime d = d-1
                | otherwise = 0 -- TODO this is placeholding, not correct
+
+-- creates a tuple of the two different computations from the one denominator
+compareComputations d = (length $ fractions d, numFractions d)
+
+-- if the two values in the tuple match, that means the computations give the same result
+-- if a 2-tuple has varying values, that means the calcs gave different values!
+test = map compareComputations [72,67,1, 2, 100, 53, 13]
