@@ -8,13 +8,9 @@ module Primes
 -- current implmenentation: take 10000 primes takes 4-5 sec
 -- timings are on MacBook Air, of CPU time 
 
-primeFactors :: Integer -> [Integer]
-primeFactors n = pfs n 2
-  where
-    pfs n start
-      | n < (start * start) = [n]
-      | mod n start == 0 = start:(pfs ( div n start) start)
-      | otherwise = pfs n (start+1)
+-- map primeFactors [1..1000000] takes 4 min
+-- map primeFactors [1..100000] takes 17 sec
+
 
 isPrime 4 = False
 isPrime 6 = False
@@ -29,3 +25,10 @@ isPrime n = isP n 3
 primes = 2 : filter isPrime [3,5..]
 
 
+primeFactors :: Integer -> [Integer]
+primeFactors n = pfs n primes
+  where
+    pfs n prms
+      | n < ((head prms) * (head prms)) = [n]
+      | mod n (head prms) == 0 = (head prms):(pfs ( div n (head prms)) prms)
+      | otherwise = pfs n (tail prms)
