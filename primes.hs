@@ -3,24 +3,22 @@ module Primes
       isPrime,
       primes) where
 
--- current implmenentation: take 30000 primes takes ~19 sec
--- current implmenentation: take 20000 primes takes ~11 sec
--- current implmenentation: take 10000 primes takes 4-5 sec
+-- current implmenentation: take 50000 primes takes ~15 sec
+-- current implmenentation: take 30000 primes takes ~8 sec
+-- current implmenentation: take 20000 primes takes ~5 sec
+-- current implmenentation: take 10000 primes takes 2-3 sec
 -- timings are on MacBook Air, of CPU time 
 
 -- map primeFactors [1..1000000] takes 190 sec
 -- map primeFactors [1..100000]  takes  15 sec
 
 
-isPrime 4 = False
-isPrime 6 = False
-isPrime 8 = False
-isPrime n = isP n 3
+isPrime n = isP n primes
   where
-    isP n start
-      | n < (start * start) = True
-      | mod n start == 0 = False
-      | otherwise = isP n (start+2)
+    isP n (prm:prms)
+      | n < (prm * prm) = True
+      | mod n prm == 0 = False
+      | otherwise = isP n prms
 
 primes = 2 : filter isPrime [3,5..]
 
