@@ -12,7 +12,7 @@ module Primes
 -- map primeFactors [1..1000000] takes 190 sec
 -- map primeFactors [1..100000]  takes  15 sec
 
-
+isPrime :: Int -> Bool
 isPrime n
   | n < 2     = False
   | otherwise = isP n primes
@@ -22,6 +22,7 @@ isPrime n
       | mod n prm == 0 = False
       | otherwise = isP n prms
 
+primes :: [Int]
 primes = 2 : filter isPrime [3,5..]
 
 
