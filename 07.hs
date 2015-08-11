@@ -1,10 +1,10 @@
 -- works!
 -- Find the 10,001st prime
+-- https://projecteuler.net/problem=7
 
 import Primes
-import System( getArgs )
 
+answer = primes !! 10000
 
-main = do args <- getArgs;
-		print (primes!! read(args!!0))
+check = answer == 104743
 
