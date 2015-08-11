@@ -10,6 +10,9 @@ odd_composites = filter (\x -> not $ isPrime x) [3,5..]
 isGood :: Int -> Int -> Bool
 isGood x y = isPrime (x - 2 * y * y)
 
-check x = any (\y -> isGood x y)  (takeWhile (\y -> y*y < x) [1..])
+try x = any (\y -> isGood x y)  (takeWhile (\y -> y*y < x) [1..])
 
-answers = filter (not . check) odd_composites
+answers = filter (not . try) odd_composites
+
+check = (head answers) == 5777
+
