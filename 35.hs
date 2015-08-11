@@ -1,5 +1,6 @@
 -- works!
 -- How many circular primes are there below one million
+-- https://projecteuler.net/problem=35
 
 import Primes (isPrime, primes)
 
@@ -15,4 +16,6 @@ isCircularPrime :: Int -> Bool
 isCircularPrime prm = all isPrime (rotatedInts prm)
 
 answer n = length (filter isCircularPrime (takeWhile (<n) primes))
+
+check = (answer 1000000) == 55
 
