@@ -15,6 +15,6 @@ truncationsR str = map reverse (truncationsL $ reverse str)
 
 
 answer = sum $ take 11 $ filter isTruncatablePrime candidates
-	where candidates = dropWhile (<= 7) primes
-	
+    where candidates = dropWhile (<= 7) primes
+    
 
