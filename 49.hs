@@ -28,3 +28,5 @@ answer = map makenumber $ concatMap getSequences candidates
     where 
     candidates = takeWhile(<10000) $ dropWhile(<1000) primes
     makenumber seq = (l seq)*10000*10000 + (m seq)*10000 + (h seq)
+
+check = (answer !! 1) == 296962999629
