@@ -28,7 +28,7 @@ numFractions d
          doublecounts = sum $ map (\x-> div (d-1) x) pfProducts
 
 -- creates a tuple of the two different computations from the one denominator
-compareComputations d = (length $ fractions d, numFractions d)
+compareComputations d = (d, length $ fractions d, numFractions d)
 
 -- if the two values in the tuple match, that means the computations give the same result
 -- if a 2-tuple has varying values, that means the calcs gave different values!
