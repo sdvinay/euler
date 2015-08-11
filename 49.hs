@@ -4,10 +4,10 @@
 import Data.List (sort) -- used to identify permutations
 import Primes
 
-data Sequence = Seq {lowest, step :: Integer}
+data Sequence = Seq {lowest, step :: Int}
 	deriving Show
 
-l :: Sequence -> Integer
+l :: Sequence -> Int
 l sequence = lowest sequence
 m sequence = lowest sequence + step sequence
 h sequence = lowest sequence + 2 * step sequence

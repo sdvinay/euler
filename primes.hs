@@ -13,7 +13,9 @@ module Primes
 -- map primeFactors [1..100000]  takes  15 sec
 
 
-isPrime n = isP n primes
+isPrime n
+  | n < 2     = False
+  | otherwise = isP n primes
   where
     isP n (prm:prms)
       | n < (prm * prm) = True
@@ -23,7 +25,7 @@ isPrime n = isP n primes
 primes = 2 : filter isPrime [3,5..]
 
 
-primeFactors :: Integer -> [Integer]
+primeFactors :: Int -> [Int]
 primeFactors n = pfs n primes
   where
     pfs n (prm:prms)
