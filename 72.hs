@@ -25,14 +25,16 @@ fractions d = [(n,d)| n<-[1..d], n<d, (gcd n d) ==1]
 numFractions :: Int-> Int
 numFractions d 
  | isPrime d = d-1
- | otherwise = d - 1 - unreducedNumerators
+ | otherwise = d - 1 - reducedNumerators
    where
-     unreducedNumerators = sum $ map reduceTuple $ map (\x->(length x, product x)) pfsets
+     reducedNumerators = sum $ map reducePfset pfsets
        where
-        reduceTuple x = (sign (fst x)) * (div (d-1) (snd x))
-        sign x 
-           | odd x = 1
-           | even x = -1
+        reducePfset pfset = (sign * multiples)
+          where
+            sign  
+             | odd $ length pfset = 1
+             | otherwise = -1
+            multiples = div (d-1) (product pfset)
         pfs = nub ( primeFactors d) -- list of prime factors, dupes removed
         pfsets = tail $ subsets pfs -- invert the primes, so multiplying together will give the right sign
 
