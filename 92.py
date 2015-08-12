@@ -24,9 +24,13 @@ def seqfinish(n):
         seqoutcomes[n] = finish
         return finish
 
-o89 = 0
-for i in range(1,10*1000*1000):
-    if seqfinish(i) == 89:
-        o89+= 1
-print o89
+def count89s(n):
+    o89 = 0
+    for i in range(1,n):
+        if seqfinish(i) == 89:
+            o89+= 1
+    return o89
+
+def check():
+	return (count89s(10*1000*1000) == 8581146) 
 
