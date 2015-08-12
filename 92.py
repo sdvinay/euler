@@ -17,11 +17,13 @@ def nextInSeq(n):
 seqoutcomes = {1:1, 89:89}
 
 def seqfinish(n):
-    if(seqoutcomes.has_key(n)):
-        return seqoutcomes.get(n)
+    if n<568:
+        if(seqoutcomes.has_key(n)):
+            return seqoutcomes.get(n)
     else: 
         finish = seqfinish(nextInSeq(n))
-        seqoutcomes[n] = finish
+        if n<568:
+            seqoutcomes[n] = finish
         return finish
 
 def count89s(n):
@@ -32,5 +34,7 @@ def count89s(n):
     return o89
 
 def check():
-	return (count89s(10*1000*1000) == 8581146) 
+    return (count89s(10*1000*1000) == 8581146) 
+
+check()
 
