@@ -1,6 +1,7 @@
 import Primes
 import Data.List
 
+-- works!
 -- Count the unique fractions up to a certain denominator limit
 --  (limit=10^6 in this case)
 -- Enumerating the fractions works, but is way too slow for
@@ -21,27 +22,30 @@ fractions d = [(n,d)| n<-[1..d], n<d, (gcd n d) ==1]
 --  generalize this by multiplying every subset of prime factors together,
 --  subtracting or adding based on the number of primes multiplied together
 
--- this is close but getting off by one because of div by negative number
--- e.g. div 8 (0-3) == -3, when we want to remove two numerators (3 and 6)
 numFractions :: Int-> Int
 numFractions d 
  | isPrime d = d-1
  | otherwise = d - 1 - unreducedNumerators
    where
-     -- this pattern is correct, but needs to be repeated beyond double-counts; if there are >2 pfs, then we have triplecounts, etc TODO
-     unreducedNumerators = sum $ map (\x->div (d-1) x)$ map product pfsets
+     unreducedNumerators = sum $ map reduceTuple $ map (\x->(length x, product x)) pfsets
        where
-         pfs = nub ( primeFactors d) -- list of prime factors, dupes removed
-         pfsets = tail $ subsets $ map (\x->(0-x)) pfs -- invert the primes, so multiplying together will give the right sign
-
-
--- creates a tuple of the two different computations from the one denominator
-compareComputations d = (d, length $ fractions d, numFractions d)
-
--- if the two values in the tuple match, that means the computations give the same result
--- if a 2-tuple has varying values, that means the calcs gave different values!
-test = map compareComputations [72,67,1, 2, 100, 53, 13, 60, 14, 30, 2*2*3*5*7*11]
+        reduceTuple x = (sign (fst x)) * (div (d-1) (snd x))
+        sign x 
+           | odd x = 1
+           | even x = -1
+        pfs = nub ( primeFactors d) -- list of prime factors, dupes removed
+        pfsets = tail $ subsets pfs -- invert the primes, so multiplying together will give the right sign
 
 subsets :: [Int] -> [[Int]]
 subsets []  = [[]]
 subsets (x:xs) = subsets xs ++ map (x:) (subsets xs)
+
+-- creates a tuple of the two different computations from the one denominator
+compareComputations d = (d, length $ fractions d, numFractions d)
+-- if the two values in the tuple match, that means the computations give the same result
+-- if a 2-tuple has varying values, that means the calcs gave different values!
+test = map compareComputations [72,67,1, 2, 100, 53, 13, 60, 14, 30, 2*2*3*5*7*11]
+
+answer limit = sum $ map numFractions [1..limit]
+
+check = (answer 1000000 == 303963552391)
